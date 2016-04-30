@@ -22,7 +22,7 @@ window.APP=new function(){
 						'<span class="icon-face-moustache"></span>',
 						'<span class="title">Flutterbeam.xyz</span>',
 					'</div>',
-				'</div>',
+				'</section>',
 				'<section class="upload">',
 					'<span>Upload an image to mustachify</span>',
 					'<img class="preview empty"/>',
@@ -30,7 +30,8 @@ window.APP=new function(){
 						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
 					'<div class="uploadButton">',
-						'<span class="icon-cloud-upload2"></span>Upload</div>',
+						'<span class="icon-cloud-upload2"></span>Upload',
+					'</div>',
 				'</section>',
 			'</div>'
 		].join('');
