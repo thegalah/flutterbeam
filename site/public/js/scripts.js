@@ -199,7 +199,21 @@ window.APP=new function(){
 		});
 	}
 }
+$(document).keydown(function(e) {
+	console.log('---ALERT');
+    switch(e.which) {
+        case 37: // left
+        	APP&&APP.View&&APP.View.cycle(-1);
+        break;
 
+        case 39: // right
+        	APP&&APP.View&&APP.View.cycle(1);
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+});
 function GalleryScreen(url){
 	var that=this;
 	this.init=function(){
