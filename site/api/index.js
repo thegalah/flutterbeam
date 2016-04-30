@@ -19,17 +19,21 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
 	console.log(req.file);
     //check existence of file
     if(is_empty(req.file)){
-		out['error']='No cv uploaded.';
+		out['error']='No image uploaded.';
 		res.json(out);
 		return;
     }
-    res.json(out);
+    //run flutter
+    attachListeners(res);
     return;
 });
 
 
-function attachListeners(ls,res){
+function attachListeners(res){
 	let hasErrored=false;
+
+	let ls = spawn('python', [config.app.path_to_flutter,]);
+	    res.json(out);
 
 	ls.stdout.on('data', function (data) {
 		let out={}
@@ -46,7 +50,7 @@ function attachListeners(ls,res){
 		}
 
 		out=data;
-		ctx.emit('import',out);
+		res.json(out);
 	});
 
 	ls.stderr.on('data', function (data) {
