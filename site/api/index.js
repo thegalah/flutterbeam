@@ -1,20 +1,20 @@
 'use strict';
 
-const config=require('config');
-const fs    = require("fs");
-const express = require('express');
-const bodyParser = require('body-parser');
-const multer  = require('multer')
-const upload = multer({ dest: config.app.upload_dir })
-const mmm = require('mmmagic'),
+let config=require('config');
+let fs    = require("fs");
+let express = require('express');
+let bodyParser = require('body-parser');
+let multer  = require('multer')
+let upload = multer({ dest: config.app.upload_dir })
+let mmm = require('mmmagic'),
  Magic = mmm.Magic;
-const magic = new Magic(mmm.MAGIC_MIME_TYPE);
+let magic = new Magic(mmm.MAGIC_MIME_TYPE);
 
-const spawn = require('child_process').spawn
+let spawn = require('child_process').spawn
 
 let exec = require('child_process').exec,
 	child;
-const app = express();
+let app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
