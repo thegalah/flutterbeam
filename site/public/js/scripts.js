@@ -18,6 +18,7 @@ window.APP=new function(){
 		this.attachListeners();
 		this.updateGalleryData();
 	}
+	this.updateTimer=null;
 	this.updateGalleryData=function(data){
 		var fetchData=function(){
 			$.ajax({
@@ -42,9 +43,9 @@ window.APP=new function(){
 			that.renderGallery(lines);
 		}
 
-		setTimeout(function(){
+		this.updateTimer=setTimeout(function(){
 			that.updateGalleryData();
-		},10000);
+		},5000);
 		fetchData();
 	}
 	this.galleryTemplate=function(galleryData){
@@ -187,6 +188,9 @@ window.APP=new function(){
 					$('img.preview2')
 					.attr('src', location.origin+'/api/flutters/'+data.filename).removeClass('empty')
 					$('div.loading').addClass('hide');
+					//update gallery
+					clearTimeout(that.updateTimer);
+					that.updateGalleryData();
 				}else{
 					//display the error
 					warning(data.error);
