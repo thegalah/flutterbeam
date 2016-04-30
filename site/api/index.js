@@ -6,7 +6,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer  = require('multer')
 const upload = multer({ dest: config.app.upload_dir })
-
+const mmm = require('mmmagic'),
+ Magic = mmm.Magic;
+const magic = new Magic(mmm.MAGIC_MIME_TYPE);
 
 const spawn = require('child_process').spawn
 
@@ -33,6 +35,28 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
 
     attachListeners(res,req.file.filename);
     return;
+});
+app.get('/flutters/:filename', function(req, res){
+	var filename=req.params.filename;
+	var file=config.app.output_dir+filename;
+	var out={};
+
+
+	fs.readFile(file, function (err,data){
+		if(err){
+			out['error']='File does not exist.';
+			res.json(out);
+			return;
+		}
+		magic.detectFile(file, function(err, result) {
+			if (err) throw err;
+			// output on Windows with 32-bit node:
+			//    application/x-dosexec; charset=binary
+			res.contentType(result);
+			res.send(data);
+			return;
+		});
+	});
 });
 
 
