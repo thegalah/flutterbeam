@@ -55,7 +55,7 @@ window.APP=new function(){
 					var x=this.width;
 					var y=this.height;
 
-					var resizeRatio=Math.min(MAX_Y/y,MAX_X/x,1);
+					var resizeRatio=Math.min(MAX_Y/y,MAX_X/x);
 					var newX=Math.round(x*resizeRatio);
 					var newY=Math.round(y*resizeRatio);
 					//force aspect ratio match

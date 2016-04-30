@@ -16,6 +16,8 @@ div.uploadButton{
 	cursor: pointer;
 	line-height: 40px;
 	color:#55c989;
+	margin:0px auto;
+	margin-top:50px;
 }
 section.upload{
 	background:#55c989;
@@ -27,7 +29,16 @@ section.upload{
 img.preview{
 	background:#666;
 	margin:0px auto;
+	display: block;
+	height:0px;
+	width:0px;
 }
 img.preview.empty{
 	height:0px;
+}
+*{
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
 }
