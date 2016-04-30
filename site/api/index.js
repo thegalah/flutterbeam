@@ -23,7 +23,8 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
 		res.json(out);
 		return;
     }
-    return {};
+    res.json(out);
+    return;
 });
 
 app.listen(config.app.port);
