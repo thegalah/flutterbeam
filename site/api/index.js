@@ -83,7 +83,7 @@ function attachListeners(res,filename){
 			return;
 		}
 
-		out['complete']='Import was successful!';
+		out['filename']=filename;
 		res.json(out);
 	});
 }
