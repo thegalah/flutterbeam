@@ -230,12 +230,14 @@ function GalleryScreen(url){
 			that.destroy();
 		})
 
-		.on('click','.controlButton',function(){
+		.on('click','.controlButton',function(e){
+			e.stopPropagation();
 			var index=$(this).index();
-			that.cycle((index||-1));
+			that.cycle((index?1:-1));
 
 		})
-		.on('click','div.img',function(){
+		.on('click','div.img',function(e){
+			e.stopPropagation();
 			that.cycle(1);
 		});
 	}
