@@ -194,6 +194,9 @@ ul.nav>li{
 	cursor: pointer;
 	padding-left: 15px;
 	padding-right:15px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 ul.nav>li.alt{
 	background:#55c989;

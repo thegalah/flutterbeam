@@ -60,6 +60,11 @@ window.APP=new function(){
 			$('input[type=file]').click();
 		})
 
+		.on('click','ul.nav>li',function(){
+			$('ul.nav li').addClass('alt');
+			$(this).removeClass('alt');
+		})
+
 		.on('change','input[type=file]',function(){
 			console.log('file change detected');
 			that.readURL(this);
