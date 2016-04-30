@@ -106,13 +106,17 @@ window.APP=new function(){
 	this.attachListeners=function(){
 		$('#app')
 
-		.on('click','li.uploadButton',function(){
-			$('input[type=file]').click();
-		})
 
 		.on('click','ul.nav>li',function(){
 			$('ul.nav li').addClass('alt');
 			$(this).removeClass('alt');
+
+			if($(this).hasClass('uploadButton')){
+				$('input[type=file]').click();
+				$('#app').removeClass('gallery').addClass('create');
+			}else{
+				$('#app').removeClass('create').addClass('gallery');
+			}
 		})
 
 		.on('change','input[type=file]',function(){

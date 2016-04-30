@@ -233,6 +233,7 @@ section.upload{
 	left:15px;
 	bottom:15px;
 	right:15px;
+	overflow: hidden;
 }
 #app.create section.gallery{
 	left:100%;
