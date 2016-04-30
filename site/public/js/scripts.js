@@ -178,7 +178,6 @@ window.APP=new function(){
 					//update image
 					$('img.preview2')
 					.attr('src', location.origin+'/api/flutters/'+data.filename).removeClass('empty')
-					success('File uploaded!');
 					$('div.loading').addClass('hide');
 				}else{
 					//display the error
