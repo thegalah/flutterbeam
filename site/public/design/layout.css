@@ -82,6 +82,10 @@ img.preview.empty{
 }
 
 
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 
 
 span.icon-cloud-upload2{
@@ -99,6 +103,12 @@ div.logo{
 div.logo>span.title{
 	font-size:50px;
 	vertical-align: middle;
+}
+div.logo>span.blurb{
+	display: block;
+	font-size:20px;
+	position: relative;
+	top:-20px;
 }
 span.icon-face-moustache{
 	font-size:90px;
