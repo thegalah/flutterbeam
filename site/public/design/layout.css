@@ -6,3 +6,10 @@ html, body{
 	color:#fff;
 	text-align: center;
 }
+
+div.uploadButton{
+	background:#ff9900;
+	width:100px;
+	height:40px;
+	cursor: pointer;
+}
