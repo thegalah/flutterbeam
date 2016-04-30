@@ -35,13 +35,36 @@ window.APP=new function(){
 		}
 		var handler=function(data){
 			//parseData
-			console.log(data);
+			var lines=data.trim().split('\n').reverse();
+			that.gallery=lines;
+			that.galleryTemplate(lines);
 		}
 
 		setTimeout(function(){
 			that.updateGalleryData();
 		},10000);
 		fetchData();
+	}
+	this.galleryTemplate=function(galleryData){
+		var galleryItems=this.gallery.map(function(filename){
+			var imgUrl=location.origin+'/api/flutters/'+filename;
+			console.log(imgUrl);
+			return [
+				'<li>',
+					'<img src="'+imgUrl+'" />',
+				'</li>',
+			].join('');
+
+		}).join('');
+		return [
+			'<ul class="gallery">',
+				galleryItems,
+			'</ul>'
+
+		].join('');
+	}
+	this.renderGallery=function(){
+
 	}
 	this.template=function(){
 		return[
@@ -74,10 +97,8 @@ window.APP=new function(){
 					'<form class="file">',
 						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
-					// '<div class="uploadButton">',
-					// 	'<span class="icon-cloud-upload2"></span>',
-					// 	'<span class="text">Upload</span>',
-					// '</div>',
+				'</section>',
+				'<section class="gallery">',
 				'</section>',
 			'</div>'
 		].join('');
