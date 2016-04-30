@@ -39,7 +39,7 @@ window.APP=new function(){
 		}
 
 		setTimeout(function(){
-			fetchData();
+			that.updateGalleryData();
 		},10000);
 		fetchData();
 	}
