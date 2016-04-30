@@ -17,16 +17,20 @@ window.APP=new function(){
 	this.template=function(){
 		return[
 			'<div id="app">',
-				'<h1>Upload an image to mustachify</h1>',
-				'<form>',
-					'<input id="myInput" type="file" style="visibility:hidden" />',
-				'</form>',
-				'<div class="uploadButton"></div>',
+				'<section class="upload">',
+					'<h1>Upload an image to mustachify</h1>',
+					'<form>',
+						'<input class="uploadInput" type="file" style="visibility:hidden" />',
+					'</form>',
+					'<div class="uploadButton">Upload</div>',
+				'</section>',
 			'</div>'
 		].join('');
 	}
 	this.attachListeners=function(){
-
+		$('#app').on('click','div.uploadButton',function(){
+			$('input.uploadInput').click();
+		});
 	}
 }
 
