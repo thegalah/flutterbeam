@@ -4,20 +4,19 @@ const config=require('config');
 const fs    = require("fs");
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const multer  = require('multer')
+const upload = multer({ dest: config.app.upload_dir })
 
 const app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-var multer  = require('multer')
-var upload = multer({ dest: '../uploads/' })
-app.put('/upload', upload.single('picture'), function(req, res) {
+
+app.post('/upload', upload.single('picture'), function(req, res) {
 	console.log('--------/uploadPicture\n\n\n\n\n');
-	console.log(req.file);
 	var out={}
 
-	console.log(req);
+	console.log(req.file);
     //check existence of file
     if(is_empty(req.file)){
 		out['error']='No cv uploaded.';

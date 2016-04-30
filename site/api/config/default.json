@@ -1,5 +1,6 @@
 {
 	"app":{
-		"port":5556
+		"port":5556,
+		"upload_dir":"../uploads/"
 	}
 }

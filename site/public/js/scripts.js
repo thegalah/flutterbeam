@@ -21,7 +21,7 @@ window.APP=new function(){
 					'<h1>Upload an image to mustachify</h1>',
 					'<form class="file">',
 						'<input type="hidden" name="testField" value="testValue"/>',
-						'<input class="uploadInput" name="picture" type="file" style="visibility:hidden" />',
+						'<input type="file" name="picture" class="uploadInput"  style="visibility:hidden" />',
 					'</form>',
 					'<div class="uploadButton">Upload</div>',
 				'</section>',
@@ -41,11 +41,11 @@ window.APP=new function(){
 		})
 	}
 	this.submitFile=function(){
-		var form=$('form.form');
+		var fData = new FormData($('form.form')[0]);
 		$.ajax({
 			url: location.origin+'/api/upload',
 			type: 'PUT',
-			data: new FormData(form[0]),
+			data: fData,
 			processData: false,
 			contentType: false,
 			success:function(data,textStatus, jqXHR){
