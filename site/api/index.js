@@ -7,6 +7,11 @@ const bodyParser = require('body-parser');
 const multer  = require('multer')
 const upload = multer({ dest: config.app.upload_dir })
 
+
+const spawn = require('child_process').spawn
+
+let exec = require('child_process').exec,
+	child;
 const app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -23,17 +28,20 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
 		res.json(out);
 		return;
     }
+
     //run flutter
-    attachListeners(res);
+    let path_to_input=config.flutter.uploads+req.file.filename;
+    let path_to_output=config.flutter.output+req.file.filename;
+    attachListeners(res,path_to_input,path_to_output);
     return;
 });
 
 
-function attachListeners(res){
+function attachListeners(res,path_to_input,path_to_output){
+	console.log('------SPAWNING')
+	console.log([config.app.path_to_flutter,path_to_input, path_to_output].join(' '));
 	let hasErrored=false;
-
-	let ls = spawn('python', [config.app.path_to_flutter,]);
-	    res.json(out);
+	let ls = spawn('python', [config.app.path_to_flutter,path_to_input, path_to_output]);
 
 	ls.stdout.on('data', function (data) {
 		let out={}
@@ -56,8 +64,6 @@ function attachListeners(res){
 	ls.stderr.on('data', function (data) {
 		let out={};
 		console.log('stderr: ' + data);
-		//slack notify
-		slack_error(data);
 		hasErrored=true;
 		out['error']='Internal server error.';
 		res.json(out);
@@ -78,7 +84,6 @@ function attachListeners(res){
 
 		out['complete']='Import was successful!';
 		res.json(out);
-		return;
 	});
 }
 app.listen(config.app.port);
