@@ -130,8 +130,8 @@ window.APP=new function(){
 
 		.on('click','ul.gallery>li',function(){
 			var item=$(this);
-			that.view=new galleryScreen(item.data('src')).init();
-			console.log(item.data('src'));
+			that.View=new GalleryScreen(item.data('src'));
+			that.View.init();
 		})
 	}
 	this.readURL=function(input) {
@@ -200,7 +200,7 @@ window.APP=new function(){
 	}
 }
 
-function galleryScreen(url){
+function GalleryScreen(url){
 	var that=this;
 	this.imgUrl=url;
 	this.init=function(){
@@ -231,14 +231,17 @@ function galleryScreen(url){
 			that.destroy();
 		})
 	}
-	this.next=function(){
-		var index=APP.gallery.indexOf()
-	}
-	this.prev=function(){
+	this.cycle=function(distance){
+		var fileName=this.imgUrl.replace(location.origin+'/api/flutters/','');
+		console.log(fileName);
+		var index=APP.gallery.indexOf(fileName)+distance%APP.gallery.length;
+		this.imageUrl=location.origin+'/api/flutters/'+APP.gallery[index];
+		
+
 	}
 	this.destroy=function(){
 		$('#galleryScreen').off().remove();
-		delete APP.view;
+		delete APP.View;
 	}
 
 }
