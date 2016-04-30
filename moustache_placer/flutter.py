@@ -4,7 +4,6 @@ import requests
 import cv2,cv
 import math
 import operator
-import numpy as np
 import os, pdb
 from PIL import Image
 import sys
@@ -15,9 +14,6 @@ import matplotlib.pyplot as plt
 _url = 'https://api.projectoxford.ai/face/v1.0/detect'
 _key = 'b2a7d0f12df84af2994ffafa71c88e5f' #Here you have to paste your primary key
 _maxNumRetries = 10
-_baseDirectory = '/Users/jeremyma/Documents/Projects/flutterbeam/stuff/moustache_placer'
-_input_path =os.path.join(_baseDirectory, 'sample.jpg')
-_output_path =os.path.join(_baseDirectory, 'output.jpg')
 
 # 0 = point, 1 = width of face
 MUSTACHE_TO_FACE_SIZE_RATIO = 0.6
@@ -119,7 +115,7 @@ def example(imagepath):
         plt.show()
 
 def mustache(pil_image, faceresult):
-    mustache = Image.open(os.path.join(_baseDirectory, 'mustaches', 'mustache_03.png'))
+    mustache = Image.open(os.path.join('.', 'mustaches', 'mustache_03.png'))
 
     # calculate mustache image aspect ratio so proportions are preserved
     # when scaling it to face
@@ -160,7 +156,7 @@ def mustache(pil_image, faceresult):
 
 
 def soulpatch(pil_image, faceresult):
-    soulpatch = Image.open(os.path.join(_baseDirectory, 'mustaches', 'soulpatch_01.png'))
+    soulpatch = Image.open(os.path.join('.', 'mustaches', 'soulpatch_01.png'))
 
     # calculate soulpatch image aspect ratio so proportions are preserved
     # when scaling it to face
@@ -198,7 +194,7 @@ def soulpatch(pil_image, faceresult):
                soulpatch_y), soulpatch)
 
 def monocle(pil_image, faceresult):
-    monocle = Image.open(os.path.join(_baseDirectory, 'mustaches', 'monocle.png'))
+    monocle = Image.open(os.path.join('.', 'mustaches', 'monocle.png'))
 
     # calculate monocle image aspect ratio so proportions are preserved
     # when scaling it to face
@@ -236,7 +232,6 @@ def monocle(pil_image, faceresult):
                monocle_y-int(monocle.size[1] / 2.0)), monocle)
 
 def flutterfly(result, input_file, output_file):
-
     pil_image = Image.open(input_file)
     cv_image = cv.CreateImageHeader(pil_image.size, cv.IPL_DEPTH_8U, 3)
     cv.SetData(cv_image, pil_image.tobytes())
@@ -251,8 +246,8 @@ def flutterfly(result, input_file, output_file):
 
     pil_image.save(output_file, "JPEG")
 
-def main(input_file):
-    with open(input_file, 'rb' ) as f:
+def main(input_file, output_file):
+    with open(input_file, 'rb') as f:
         data = f.read()
 
         # Face detection parameters
@@ -265,9 +260,9 @@ def main(input_file):
         result = processRequest(data, headers, params)
         #pdb.set_trace()
 
-    flutterfly(result, input_file, _output_path)
+    flutterfly(result, input_file, output_file)
 
 if __name__ == '__main__':
     input_file = sys.argv[1]
     output_file = sys.argv[2]
-    main(os.path.join(output_file,input_file))
+    main(input_file, output_file)
