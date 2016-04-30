@@ -210,7 +210,14 @@ function galleryScreen(url){
 	this.template=function(){
 		return [
 			'<div id="galleryScreen">',
-				'<div class="img" style="background-image:url(\''+this.imgUrl+'\')"></div>',
+				'<div class="img" style="background-image:url(\''+this.imgUrl+'\')">',
+					'<div class="previous controlButton">',
+						'<span class="icon-circle-left"></span>',
+					'</div>',
+					'<div class="next controlButton">',
+						'<span class="icon-circle-right"></span>',
+					'</div>',
+				'</div>',
 				'<section class="galleryBg">',
 				'</section>',
 			'</div>'

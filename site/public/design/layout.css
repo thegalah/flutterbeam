@@ -103,11 +103,11 @@ section.upload span.icon-face-moustache{
 
 @font-face {
     font-family: 'icomoon';
-    src:    url('fonts/icomoon.eot?zdr54q');
-    src:    url('fonts/icomoon.eot?zdr54q#iefix') format('embedded-opentype'),
-        url('fonts/icomoon.ttf?zdr54q') format('truetype'),
-        url('fonts/icomoon.woff?zdr54q') format('woff'),
-        url('fonts/icomoon.svg?zdr54q#icomoon') format('svg');
+    src:    url('fonts/icomoon.eot?90s2a3');
+    src:    url('fonts/icomoon.eot?90s2a3#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?90s2a3') format('truetype'),
+        url('fonts/icomoon.woff?90s2a3') format('woff'),
+        url('fonts/icomoon.svg?90s2a3#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -133,6 +133,12 @@ section.upload span.icon-face-moustache{
 .icon-cloud-upload:before {
     content: "\e900";
 }
+.icon-circle-right:before {
+    content: "\e904";
+}
+.icon-circle-left:before {
+    content: "\e905";
+}
 .icon-face-moustache:before {
     content: "\e902";
 }
@@ -140,6 +146,25 @@ section.upload span.icon-face-moustache{
     content: "\e901";
 }
 
+
+#galleryScreen div.controlButton{
+	width:50px;
+	height:50px;
+	color:#fff;
+	position: absolute;
+	top:50%;
+	margin-top:-25px;
+	text-align: center;
+	font-size:35px;
+	line-height: 50px;
+	cursor: pointer;
+}
+#galleryScreen div.previous{
+	left:15px;
+}
+#galleryScreen div.next{
+	right:15px;
+}
 
 
 
