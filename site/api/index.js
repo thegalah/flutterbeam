@@ -39,9 +39,8 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
 
 function attachListeners(res,path_to_input,path_to_output){
 	console.log('------SPAWNING')
-	console.log([config.app.path_to_flutter,path_to_input, path_to_output].join(' '));
 	let hasErrored=false;
-	let ls = spawn('python', [config.app.path_to_flutter,path_to_input, path_to_output]);
+	let ls = spawn('python', [config.app.path_to_flutter,path_to_input, path_to_output, config.app.path_to_mustaches]);
 
 	ls.stdout.on('data', function (data) {
 		let out={}
