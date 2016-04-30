@@ -18,9 +18,9 @@ window.APP=new function(){
 		return[
 			'<div id="app">',
 				'<section class="upload">',
-					'<h1>Upload an image to mustachify</h1>',
+					'<span>Upload an image to mustachify</span>',
+					'<img class="preview empty"/>',
 					'<form class="file">',
-						'<input type="hidden" name="testField" value="testValue"/>',
 						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
 					'<div class="uploadButton">Upload</div>',
@@ -37,10 +37,33 @@ window.APP=new function(){
 
 		.on('change','input[type=file]',function(){
 			console.log('file change detected');
+			that.readURL(this);
 			that.submitFile();
 		})
 	}
+	this.readURL=function(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload =(function(theFile) { 
+				var image = new Image();
+				image.src = theFile.target.result;
+
+				image.onload = function() {
+					// access image size here 
+					console.log(this.width);
+					console.log(this.height);
+
+					$('img.preview').attr('src', this.src).removeClass('empty');
+				};
+			});
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 	this.submitFile=function(){
+
+
 		var fData = new FormData($('form.file')[0]);
 		console.log(fData);
 		$.ajax({

@@ -4,6 +4,9 @@ html,body{
 	font-family: 'Open Sans', sans-serif;
 	padding:0;
 	margin:0;
+	position: relative;
+	height:100%;
+	width:100%;
 }
 
 div.uploadButton{
@@ -17,4 +20,16 @@ div.uploadButton{
 section.upload{
 	background:#55c989;
 	color:#fff;
+	text-align: center;
+	min-height: 500px;
+	direction: block;
+}
+img.preview{
+	width:800px;
+	height:600px;
+	background:#666;
+	margin:0px auto;
+}
+img.preview.empty{
+	height:0px;
 }
