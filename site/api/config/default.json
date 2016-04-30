@@ -2,7 +2,8 @@
 	"app":{
 		"port":5556,
 		"upload_dir":"../../uploads/",
-		"path_to_flutter":"../../flutter/flutter.py"
+		"path_to_flutter":"../../flutter/flutter.py",
+		"path_to_moustache":"../../flutter/mustaches/"
 	},
 	"flutter":{
 		"uploads":"../../uploads/",
