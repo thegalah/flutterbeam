@@ -23,9 +23,13 @@ window.APP=new function(){
 						'<span class="title">Flutterbeam.xyz</span>',
 						'<span class="blurb">Flutterbeam a photo!</span>',
 					'</div>',
-					'<ul>',
-						'<li>',
-							'<span class="icon-grid"></span>',
+					'<ul class="nav">',
+						'<li class="uploadButton">',
+							'<span class="icon icon-cloud-upload2"></span>',
+							'<span class="text">Upload</span>',
+						'</li>',
+						'<li class="alt">',
+							'<span class="icon icon-grid"></span>',
 							'<span class="text">Gallery</span>',
 						'</li>',
 					'</ul>',
@@ -41,10 +45,10 @@ window.APP=new function(){
 					'<form class="file">',
 						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
-					'<div class="uploadButton">',
-						'<span class="icon-cloud-upload2"></span>',
-						'<span class="text">Upload</span>',
-					'</div>',
+					// '<div class="uploadButton">',
+					// 	'<span class="icon-cloud-upload2"></span>',
+					// 	'<span class="text">Upload</span>',
+					// '</div>',
 				'</section>',
 			'</div>'
 		].join('');
@@ -52,7 +56,7 @@ window.APP=new function(){
 	this.attachListeners=function(){
 		$('#app')
 
-		.on('click','div.uploadButton, div.uploadButton span',function(){
+		.on('click','li.uploadButton',function(){
 			$('input[type=file]').click();
 		})
 

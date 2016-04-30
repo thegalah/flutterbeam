@@ -176,3 +176,42 @@ span.icon-face-moustache{
 	vertical-align: middle;
 }
 
+
+ul.nav{
+	margin:0;
+	padding:0;
+	list-style: none;
+	position: absolute;
+	right:15px;
+	top:26px;
+}
+ul.nav>li{
+	background:#fff;
+	color:#55c898;
+	display: inline-block;
+	height:40px;
+	margin-right:15px;
+	cursor: pointer;
+	padding-left: 15px;
+	padding-right:15px;
+}
+ul.nav>li.alt{
+	background:#55c989;
+	color:#fff;
+}
+ul.nav>li>span.text{
+	padding-left:10px;
+}
+ul.nav>li:last-child{
+	margin-right:0px;
+}
+ul.nav>li>span.icon{
+	width:40px;
+	height:40px;
+	line-height: 40px;
+	vertical-align: top;
+}
+ul.nav>li>span.text{
+	line-height: 40px;
+	vertical-align: top;
+}
