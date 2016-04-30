@@ -48,7 +48,6 @@ window.APP=new function(){
 	this.galleryTemplate=function(galleryData){
 		var galleryItems=this.gallery.map(function(filename){
 			var imgUrl=location.origin+'/api/flutters/'+filename;
-			console.log(imgUrl);
 			return [
 				'<li style="background-image:url(\''+imgUrl+'\')">',
 					'<div></div>',
@@ -164,7 +163,6 @@ window.APP=new function(){
 		$('div.loading').removeClass('hide');
 
 		var fData = new FormData($('form.file')[0]);
-		console.log(fData);
 		$.ajax({
 			url: location.origin+'/api/upload',
 			type: 'PUT',
