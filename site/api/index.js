@@ -32,7 +32,6 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
     }
 
     //run flutter
-
     attachListeners(res,req.file.filename);
     return;
 });
@@ -109,6 +108,13 @@ function attachListeners(res,filename){
 
 		out['filename']=filename;
 		res.json(out);
+		//update gallery.txt
+
+
+		fs.appendFile('gallery.txt', filename, function (err) {
+		});
+
+
 	});
 }
 app.listen(config.app.port);
