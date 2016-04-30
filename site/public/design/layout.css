@@ -23,6 +23,11 @@ div.uploadButton{
 div.uploadButton span{
 	cursor: pointer;
 }
+div.uploadButton span.text{
+	line-height: 40px;
+	vertical-align: top;
+	padding-left: 10px;
+}
 section.upload{
 	background:#55c989;
 	color:#fff;

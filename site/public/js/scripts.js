@@ -37,7 +37,7 @@ window.APP=new function(){
 					'</form>',
 					'<div class="uploadButton">',
 						'<span class="icon-cloud-upload2"></span>',
-						'<span>Upload</span>',
+						'<span class="text">Upload</span>',
 					'</div>',
 				'</section>',
 			'</div>'
