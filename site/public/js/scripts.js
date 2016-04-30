@@ -202,6 +202,7 @@ window.APP=new function(){
 
 function galleryScreen(url){
 	var that=this;
+	this.imgUrl=url;
 	this.init=function(){
 		$('body').append(this.template());
 		this.attachListeners();
@@ -209,7 +210,7 @@ function galleryScreen(url){
 	this.template=function(){
 		return [
 			'<div id="galleryScreen">',
-				'<div class="img" style="background-image:url(\''+url+'\')"></div>',
+				'<div class="img" style="background-image:url(\''+this.imgUrl+'\')"></div>',
 				'<section class="galleryBg">',
 				'</section>',
 			'</div>'
@@ -222,6 +223,11 @@ function galleryScreen(url){
 		.on('click','section.galleryBg',function(){
 			that.destroy();
 		})
+	}
+	this.next=function(){
+		var index=APP.gallery.indexOf()
+	}
+	this.prev=function(){
 	}
 	this.destroy=function(){
 		$('#galleryScreen').off().remove();

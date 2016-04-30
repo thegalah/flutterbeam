@@ -291,14 +291,15 @@ section.galleryBg{
 
 #galleryScreen div.img{
 	position: absolute;
-	top:10%;
-	bottom:10%;
-	left:10%;
-	right:10%;
+	top:100px;
+	bottom:100px;
+	left:100px;
+	right:100px;
 	background-size:contain;
 	z-index:1000;
 	background-position: center center;
 	background-repeat:no-repeat;
+	background-color:#000;
 }
 
 
