@@ -214,8 +214,8 @@ def monocle(pil_image, faceresult, moustache_folder):
     monocle_w = int(1.0 * faceresult['faceRectangle']['width'] * MONOCLE_TO_FACE_SIZE_RATIO)
     soulpatch_h = int(1.0 * monocle_w / monocle_aspect_ratio)
 
-    monocle_x = int(faceLandmarks['pupilLeft']['x'])
-    monocle_y = int(faceLandmarks['pupilLeft']['y'])
+    monocle_x = int(faceLandmarks['pupilRight']['x'])
+    monocle_y = int(faceLandmarks['pupilRight']['y'])
 
     # Rotate and resize the monocle
     # Rotate first so the final filter applied is ANTIALIAS
