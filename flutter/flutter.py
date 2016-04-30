@@ -114,8 +114,8 @@ def example(imagepath):
         ax.imshow( img )
         plt.show()
 
-def mustache(pil_image, faceresult):
-    mustache = Image.open(os.path.join('.', 'mustaches', 'mustache_03.png'))
+def mustache(pil_image, faceresult, moustache_folder):
+    mustache = Image.open(os.path.join(moustache_folder, 'mustache_03.png'))
 
     # calculate mustache image aspect ratio so proportions are preserved
     # when scaling it to face
@@ -155,8 +155,8 @@ def mustache(pil_image, faceresult):
                mustache_y-int(mustache.size[1] / 2.0)), mustache)
 
 
-def soulpatch(pil_image, faceresult):
-    soulpatch = Image.open(os.path.join('.', 'mustaches', 'soulpatch_01.png'))
+def soulpatch(pil_image, faceresult, moustache_folder):
+    soulpatch = Image.open(os.path.join(moustache_folder, 'soulpatch_01.png'))
 
     # calculate soulpatch image aspect ratio so proportions are preserved
     # when scaling it to face
@@ -193,8 +193,8 @@ def soulpatch(pil_image, faceresult):
     pil_image.paste(soulpatch, (soulpatch_x-int(soulpatch.size[0] / 2.0),
                soulpatch_y), soulpatch)
 
-def monocle(pil_image, faceresult):
-    monocle = Image.open(os.path.join('.', 'mustaches', 'monocle.png'))
+def monocle(pil_image, faceresult, moustache_folder):
+    monocle = Image.open(os.path.join(moustache_folder, 'monocle.png'))
 
     # calculate monocle image aspect ratio so proportions are preserved
     # when scaling it to face
@@ -231,7 +231,7 @@ def monocle(pil_image, faceresult):
     pil_image.paste(monocle, (monocle_x-int(monocle.size[0] / 2.0),
                monocle_y-int(monocle.size[1] / 2.0)), monocle)
 
-def flutterfly(result, input_file, output_file):
+def flutterfly(result, input_file, output_file, moustache_folder):
     pil_image = Image.open(input_file)
     cv_image = cv.CreateImageHeader(pil_image.size, cv.IPL_DEPTH_8U, 3)
     cv.SetData(cv_image, pil_image.tobytes())
@@ -239,14 +239,14 @@ def flutterfly(result, input_file, output_file):
     pil_image = Image.frombytes("RGB", cv.GetSize(cv_image), cv_image.tostring())
 
     for faceresult in result:
-        mustache(pil_image, faceresult)
-        soulpatch(pil_image,faceresult)
-        monocle(pil_image, faceresult)
+        mustache(pil_image, faceresult, moustache_folder)
+        soulpatch(pil_image,faceresult, moustache_folder)
+        monocle(pil_image, faceresult, moustache_folder)
 
 
     pil_image.save(output_file, "JPEG")
 
-def main(input_file, output_file):
+def main(input_file, output_file, moustache_folder):
     with open(input_file, 'rb') as f:
         data = f.read()
 
@@ -260,9 +260,10 @@ def main(input_file, output_file):
         result = processRequest(data, headers, params)
         #pdb.set_trace()
 
-    flutterfly(result, input_file, output_file)
+    flutterfly(result, input_file, output_file, moustache_folder)
 
 if __name__ == '__main__':
     input_file = sys.argv[1]
     output_file = sys.argv[2]
-    main(input_file, output_file)
+    moustache_folder = sys.argv[3]
+    main(input_file, output_file, moustache_folder)
