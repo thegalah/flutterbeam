@@ -67,7 +67,7 @@ window.APP=new function(){
 	}
 	this.template=function(){
 		return[
-			'<div id="app" class="create">',
+			'<div id="app" class="gallery">',
 				'<section class="header">',
 					'<div class="logo">',
 						'<span class="icon-face-moustache"></span>',
@@ -75,11 +75,11 @@ window.APP=new function(){
 						'<span class="blurb">flutterbeam a photo!</span>',
 					'</div>',
 					'<ul class="nav">',
-						'<li class="uploadButton">',
+						'<li class="uploadButton alt">',
 							'<span class="icon icon-cloud-upload2"></span>',
 							'<span class="text">Create</span>',
 						'</li>',
-						'<li class="alt">',
+						'<li>',
 							'<span class="icon icon-grid"></span>',
 							'<span class="text">Gallery</span>',
 						'</li>',
