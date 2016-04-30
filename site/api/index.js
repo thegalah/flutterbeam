@@ -12,7 +12,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
-app.post('/upload', upload.single('picture'), function(req, res) {
+app.put('/upload', upload.single('picture_file'), function(req, res) {
 	console.log('--------/uploadPicture\n\n\n\n\n');
 	var out={}
 
