@@ -270,16 +270,33 @@ ul.gallery>li:hover>div{
 	opacity: 0;
 
 }
+div#galleryScreen{
+	width:100%;
+	height:100%;
+	position: fixed;
+	top:0px;
+	right:0px;
+}
 
 section.galleryBg{
 	background:#000;
 	opacity:0.6;
-	position: fixed;
+	position: absolute;
 	width:100%;
 	height:100%;
 	top:0px;
 	left:0px;
 	cursor: pointer;
+}
+
+#galleryScreen div.img{
+	position: absolute;
+	top:10%;
+	bottom:10%;
+	left:10%;
+	right:10%;
+	background-size:cover;
+	z-index:1000;
 }
 
 

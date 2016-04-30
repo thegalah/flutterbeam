@@ -209,8 +209,8 @@ function galleryScreen(url){
 	this.template=function(){
 		return [
 			'<div id="galleryScreen">',
+				'<div class="img" style="background-image:url(\''+url+'\')"></div>',
 				'<section class="galleryBg">',
-					'<div class="image" style=""></div>',
 				'</section>',
 			'</div>'
 		].join('');
