@@ -203,6 +203,9 @@ window.APP=new function(){
 		});
 	}
 }
+
+$.ajaxSetup({ cache: false });
+
 $(document).keydown(function(e) {
     switch(e.which) {
         case 37: // left
