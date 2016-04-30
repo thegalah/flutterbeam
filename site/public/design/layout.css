@@ -234,8 +234,11 @@ section.upload{
 	bottom:15px;
 	right:15px;
 }
-#app.create section.galery{
+#app.create section.gallery{
 	left:100%;
+}
+#app.create section.gallery{
+	right:100%;
 }
 
 ul.gallery{

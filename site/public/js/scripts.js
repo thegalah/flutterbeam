@@ -67,7 +67,7 @@ window.APP=new function(){
 	}
 	this.template=function(){
 		return[
-			'<div id="app">',
+			'<div id="app" class="create">',
 				'<section class="header">',
 					'<div class="logo">',
 						'<span class="icon-face-moustache"></span>',
