@@ -17,6 +17,12 @@ window.APP=new function(){
 	this.template=function(){
 		return[
 			'<div id="app">',
+				'<section class="header">',
+					'<div class="logo">',
+						'<span class="icon-face-moustache"></span>',
+						'<span class="title">Flutterbeam.xyz</span>',
+					'</div>',
+				'</div>',
 				'<section class="upload">',
 					'<span>Upload an image to mustachify</span>',
 					'<img class="preview empty"/>',

@@ -47,11 +47,11 @@ img.preview.empty{
 
 @font-face {
     font-family: 'icomoon';
-    src:    url('fonts/icomoon.eot?aaeuic');
-    src:    url('fonts/icomoon.eot?aaeuic#iefix') format('embedded-opentype'),
-        url('fonts/icomoon.ttf?aaeuic') format('truetype'),
-        url('fonts/icomoon.woff?aaeuic') format('woff'),
-        url('fonts/icomoon.svg?aaeuic#icomoon') format('svg');
+    src:    url('fonts/icomoon.eot?6w1qg5');
+    src:    url('fonts/icomoon.eot?6w1qg5#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?6w1qg5') format('truetype'),
+        url('fonts/icomoon.woff?6w1qg5') format('woff'),
+        url('fonts/icomoon.svg?6w1qg5#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -71,12 +71,17 @@ img.preview.empty{
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-face-moustache:before {
+    content: "\e902";
+}
 .icon-cloud-upload2:before {
     content: "\e901";
 }
 .icon-cloud-upload:before {
     content: "\e900";
 }
+
+
 
 
 span.icon-cloud-upload2{
@@ -87,4 +92,16 @@ span.icon-cloud-upload2{
 	vertical-align: top;
 }
 
+div.logo{
+	color:#fff;
+	text-align: center;
+}
+div.logo>span.title{
+	font-size:50px;
+	vertical-align: middle;
+}
+span.icon-face-moustache{
+	font-size:90px;
+	vertical-align: middle;
+}
 
