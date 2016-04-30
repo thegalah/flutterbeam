@@ -202,7 +202,6 @@ window.APP=new function(){
 
 function GalleryScreen(url){
 	var that=this;
-	this.imgUrl=url;
 	this.init=function(){
 		$('body').append(this.template());
 		this.attachListeners();
@@ -210,7 +209,7 @@ function GalleryScreen(url){
 	this.template=function(){
 		return [
 			'<div id="galleryScreen">',
-				'<div class="img" style="background-image:url(\''+this.imgUrl+'\')">',
+				'<div class="img" data-src="'+url+'" style="background-image:url(\''+url+'\')">',
 					'<div class="previous controlButton">',
 						'<span class="icon-circle-left"></span>',
 					'</div>',
@@ -230,14 +229,25 @@ function GalleryScreen(url){
 		.on('click','section.galleryBg',function(){
 			that.destroy();
 		})
+
+		.on('click','.controlButton',function(){
+			var index=$(this).index();
+			that.cycle((index||-1));
+
+		})
+		.on('click','div.img',function(){
+			that.cycle(1);
+		});
 	}
 	this.cycle=function(distance){
-		var fileName=this.imgUrl.replace(location.origin+'/api/flutters/','');
-		console.log(fileName);
-		var index=APP.gallery.indexOf(fileName)+distance%APP.gallery.length;
-		this.imageUrl=location.origin+'/api/flutters/'+APP.gallery[index];
-		
-
+		var imgDom=$('#galleryScreen div.img');
+		var fileName=imgDom.data('src').replace(location.origin+'/api/flutters/','');
+		var index=APP.gallery.indexOf(fileName);
+		var newIndex=(index+distance+APP.gallery.length)%APP.gallery.length;
+		var newUrl=location.origin+'/api/flutters/'+APP.gallery[newIndex];
+		imgDom.data('src',newUrl).css({
+			'background-image':'url(\''+newUrl+'\')'
+		});
 	}
 	this.destroy=function(){
 		$('#galleryScreen').off().remove();
