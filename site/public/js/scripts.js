@@ -7,12 +7,41 @@ return new Za.prototype.init(a,b,c,d,e)}m.Tween=Za,Za.prototype={constructor:Za,
 console.log('scripts initialising');
 window.APP=new function(){
 	var that=this;
+	this.gallery=[];
 	this.init=function(){
 		console.log('initialising');
 		$('body').append([
 			that.template()
 		].join(''));
 		this.attachListeners();
+		this.updateGalleryData();
+	}
+	this.updateGalleryData=function(data){
+		var fetchData=function(){
+			$.ajax({
+				url:location.origin+'/gallery',
+				type:"GET",
+				success:function(data){
+					if(typeof data.error=='undefined'){
+						handler(data);
+					}else{
+						warning(data.error);
+					}
+				},
+				error:function(data){
+					warning(data);
+				}
+			});
+		}
+		var handler=function(data){
+			//parseData
+			console.log(data);
+		}
+
+		setTimeout(function(){
+			fetchData();
+		},10000);
+		fetchData();
 	}
 	this.template=function(){
 		return[
