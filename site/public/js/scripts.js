@@ -50,11 +50,24 @@ window.APP=new function(){
 				image.src = theFile.target.result;
 
 				image.onload = function() {
-					// access image size here 
-					console.log(this.width);
-					console.log(this.height);
+					var MAX_X=800;
+					var MAX_Y=600;
+					var x=this.width;
+					var y=this.height;
 
-					$('img.preview').attr('src', this.src).removeClass('empty');
+					var resizeRatio=Math.min(MAX_Y/y,MAX_X/x,1);
+					var newX=Math.round(x*resizeRatio);
+					var newY=Math.round(y*resizeRatio);
+					//force aspect ratio match
+
+
+					$('img.preview')
+					.attr('src', this.src)
+					.removeClass('empty')
+					.css({
+						'width':newX+'px',
+						'height':newY+'px'
+					});
 				};
 			});
 
