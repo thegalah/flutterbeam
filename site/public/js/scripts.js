@@ -89,6 +89,9 @@ window.APP=new function(){
 				console.log('data sent successfully');
 				if(typeof data.error=='undefined'){
 					//good nothing broke perform actions
+					//update image
+					$('img.preview')
+					.attr('src', location.origin+'/api/flutters/'+data.filename)
 					success('File uploaded!');
 				}else{
 					//display the error

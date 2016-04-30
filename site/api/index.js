@@ -1,18 +1,20 @@
 'use strict';
 
-const config=require('config');
-const fs    = require("fs");
-const express = require('express');
-const bodyParser = require('body-parser');
-const multer  = require('multer')
-const upload = multer({ dest: config.app.upload_dir })
+let config=require('config');
+let fs    = require("fs");
+let express = require('express');
+let bodyParser = require('body-parser');
+let multer  = require('multer');
+let upload = multer({ dest: config.app.upload_dir });
+let mmm = require('mmmagic'),
+ Magic = mmm.Magic;
+let magic = new Magic(mmm.MAGIC_MIME_TYPE);
 
-
-const spawn = require('child_process').spawn
+let spawn = require('child_process').spawn
 
 let exec = require('child_process').exec,
 	child;
-const app = express();
+let app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -30,17 +32,41 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
     }
 
     //run flutter
-    let path_to_input=config.flutter.uploads+req.file.filename;
-    let path_to_output=config.flutter.output+req.file.filename;
-    attachListeners(res,path_to_input,path_to_output);
+
+    attachListeners(res,req.file.filename);
     return;
+});
+app.get('/flutters/:filename', function(req, res){
+	var filename=req.params.filename;
+	var file=config.app.output_dir+filename;
+	var out={};
+
+
+	fs.readFile(file, function (err,data){
+		if(err){
+			out['error']='File does not exist.';
+			res.json(out);
+			return;
+		}
+		magic.detectFile(file, function(err, result) {
+			if (err) throw err;
+			// output on Windows with 32-bit node:
+			//    application/x-dosexec; charset=binary
+			res.contentType(result);
+			res.send(data);
+			return;
+		});
+	});
 });
 
 
-function attachListeners(res,path_to_input,path_to_output){
-	console.log('------SPAWNING')
+function attachListeners(res,filename){
+
+    let path_to_input=config.flutter.uploads+filename;
+    let path_to_output=config.flutter.output+filename;
+
 	let hasErrored=false;
-	let ls = spawn('python', [config.app.path_to_flutter,path_to_input, path_to_output, config.app.path_to_mustaches]);
+	let ls = spawn('python', [config.app.path_to_flutter,path_to_input, path_to_output, config.app.path_to_moustache]);
 
 	ls.stdout.on('data', function (data) {
 		let out={}
@@ -81,7 +107,7 @@ function attachListeners(res,path_to_input,path_to_output){
 			return;
 		}
 
-		out['complete']='Import was successful!';
+		out['filename']=filename;
 		res.json(out);
 	});
 }
