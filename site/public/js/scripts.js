@@ -21,7 +21,7 @@ window.APP=new function(){
 					'<h1>Upload an image to mustachify</h1>',
 					'<form class="file">',
 						'<input type="hidden" name="testField" value="testValue"/>',
-						'<input type="file" name="picture_file">',
+						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
 					'<div class="uploadButton">Upload</div>',
 				'</section>',
