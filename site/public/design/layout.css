@@ -227,6 +227,16 @@ section.gallery{
 	bottom:15px;
 	right:15px;
 }
+section.upload{
+	position: absolute;
+	top:133px;
+	left:15px;
+	bottom:15px;
+	right:15px;
+}
+#app.create section.galery{
+	left:100%;
+}
 
 ul.gallery{
 	padding:0px;
@@ -242,4 +252,11 @@ ul.gallery>li{
 	background-size:cover;
 	display: inline-block;
 	vertical-align: top;
+	background-position: center center;
+	cursor: pointer;
+	opacity: 0.7;
+	background-color:#000;
+}
+ul.gallery>li:hover{
+	opacity: 1;
 }
