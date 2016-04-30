@@ -37,7 +37,7 @@ window.APP=new function(){
 			//parseData
 			var lines=data.trim().split('\n').reverse();
 			that.gallery=lines;
-			that.galleryTemplate(lines);
+			that.renderGallery(lines);
 		}
 
 		setTimeout(function(){
@@ -50,8 +50,7 @@ window.APP=new function(){
 			var imgUrl=location.origin+'/api/flutters/'+filename;
 			console.log(imgUrl);
 			return [
-				'<li>',
-					'<img src="'+imgUrl+'" />',
+				'<li style="background-image:url(\''+imgUrl+'\')">',
 				'</li>',
 			].join('');
 
@@ -64,7 +63,7 @@ window.APP=new function(){
 		].join('');
 	}
 	this.renderGallery=function(){
-
+		$('section.gallery').html(this.galleryTemplate());
 	}
 	this.template=function(){
 		return[
