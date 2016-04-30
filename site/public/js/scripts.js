@@ -51,7 +51,7 @@ window.APP=new function(){
 		var galleryItems=this.gallery.map(function(filename){
 			var imgUrl=location.origin+'/api/flutters/'+filename;
 			return [
-				'<li style="background-image:url(\''+imgUrl+'\')">',
+				'<li data-src="'+imgUrl+'" style="background-image:url(\''+imgUrl+'\')">',
 					'<div></div>',
 				'</li>',
 			].join('');
@@ -125,6 +125,14 @@ window.APP=new function(){
 			that.readURL(this);
 			that.submitFile();
 		})
+
+		//gallery item
+
+		.on('click','ul.gallery>li',function(){
+			var item=$(this);
+			that.view=new galleryScreen(item.data('src')).init();
+			console.log(item.data('src'));
+		})
 	}
 	this.readURL=function(input) {
 		if (input.files && input.files[0]) {
@@ -190,6 +198,36 @@ window.APP=new function(){
 			}
 		});
 	}
+}
+
+function galleryScreen(url){
+	var that=this;
+	this.init=function(){
+		$('body').append(this.template());
+		this.attachListeners();
+	}
+	this.template=function(){
+		return [
+			'<div id="galleryScreen">',
+				'<section class="galleryBg">',
+					'<div class="image" style=""></div>',
+				'</section>',
+			'</div>'
+		].join('');
+	}
+
+	this.attachListeners=function(){
+		$('#galleryScreen')
+
+		.on('click','section.galleryBg',function(){
+			that.destroy();
+		})
+	}
+	this.destroy=function(){
+		$('#galleryScreen').off().remove();
+		delete APP.view;
+	}
+
 }
 
 function warning(msg){
