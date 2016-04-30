@@ -25,7 +25,10 @@ window.APP=new function(){
 					'</div>',
 				'</section>',
 				'<section class="upload">',
-					'<img class="preview empty"/>',
+					'<div class="img_container">',
+						'<img class="preview2 empty"/>',
+						'<img class="preview empty"/>',
+					'</div>',
 					'<form class="file">',
 						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
@@ -69,13 +72,14 @@ window.APP=new function(){
 					//force aspect ratio match
 
 
-					$('img.preview')
-					.attr('src', this.src)
+					$('div.img_container')
 					.removeClass('empty')
 					.css({
 						'width':newX+'px',
 						'height':newY+'px'
 					});
+
+					$('img.preview').attr('src', this.src);
 				};
 			});
 
@@ -98,8 +102,8 @@ window.APP=new function(){
 				if(typeof data.error=='undefined'){
 					//good nothing broke perform actions
 					//update image
-					$('img.preview')
-					.attr('src', location.origin+'/api/flutters/'+data.filename)
+					$('img.preview2')
+					.attr('src', location.origin+'/api/flutters/'+data.filename).removeClass('empty')
 					success('File uploaded!');
 				}else{
 					//display the error

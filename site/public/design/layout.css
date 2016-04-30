@@ -27,16 +27,28 @@ section.upload{
 	min-height: 500px;
 	direction: block;
 }
-img.preview{
-	background:#666;
+section.upload img{
 	margin:0px auto;
 	display: block;
-	height:0px;
+	height:100%;
+	width:100%;
+	opacity: 1;
+	position: absolute;
+	top:0px;
+	left:0px;
+}
+section.upload img.preview2{
+	z-index:10;
+}
+div.img_container{
+	position: relative;
+	margin:0px auto;
+}
+div.img_container.empty{
 	width:0px;
-}
-img.preview.empty{
 	height:0px;
 }
+
 *{
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
