@@ -30,15 +30,17 @@ app.put('/upload', upload.single('picture_file'), function(req, res) {
     }
 
     //run flutter
-    let path_to_input=config.flutter.uploads+req.file.filename;
-    let path_to_output=config.flutter.output+req.file.filename;
-    attachListeners(res,path_to_input,path_to_output);
+
+    attachListeners(res,req.file.filename);
     return;
 });
 
 
-function attachListeners(res,path_to_input,path_to_output){
-	console.log('------SPAWNING')
+function attachListeners(res,filename){
+
+    let path_to_input=config.flutter.uploads+filename;
+    let path_to_output=config.flutter.output+filename;
+
 	let hasErrored=false;
 	let ls = spawn('python', [config.app.path_to_flutter,path_to_input, path_to_output, config.app.path_to_moustache]);
 
