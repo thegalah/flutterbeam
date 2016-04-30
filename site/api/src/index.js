@@ -7,7 +7,7 @@ let router = require('koa-router')();
 let routes=[
 	{
 		'path':'./routes',
-		'prefix':'/routes',
+		'prefix':'/',
 		'type':'public'
 	}
 ];

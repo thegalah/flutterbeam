@@ -1,51 +1,58 @@
 'use strict';
 
-let koa = require('koa-framework');
-let app = koa();
-let api = require('koa-router')();
-let config = require('config');
-
-let json = require('koa-json');
+const config=require('config');
+const fs    = require("fs");
+const express = require('express');
+const bodyParser = require('body-parser');
 
 
-exports.app=app;
+const app = express();
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-//use json
-app.use(json());
+var multer  = require('multer')
+var upload = multer({ dest: '../uploads/' })
+app.put('/upload', upload.single('picture'), function(req, res) {
+	console.log('--------/uploadPicture\n\n\n\n\n');
+	console.log(req.file);
+	var out={}
 
-// logger
-
-app.use(function *(next){
-	//yield delayThunk(500);
-	let start = new Date;
-	yield next;
-	let ms = new Date - start;
-	console.log('----%s %s - %sms', this.method, this.url, ms);
+	console.log(req);
+    //check existence of file
+    if(is_empty(req.file)){
+		out['error']='No cv uploaded.';
+		res.json(out);
+		return;
+    }
+    return {};
 });
-
-function delayThunk(time) {
-	return function(callback) {
-		setTimeout(callback,time);
-	};
-}
-let router=require('./src').router;
-app.use(router.routes());
-
-//catching errors
-/*app.use(function *(next) {
-	try {
-		yield next;
-	} catch (err) {
-		console.log(err);
-		//slack_notify(err);
-		//rethrow error
-		throw err;
-		yield next;
-	}
-});*/
-
-
 
 app.listen(config.app.port);
 
-console.log('\n\n\n\n**********SERVER RUNNING ON PORT %d\n\n\n\n',config.app.port);
+console.log('\n\n\n\n**********STARTING EXPRESS SERVER ON PORT '+config.app.port+'\n\n\n\n');
+
+
+function is_empty(){
+	for (var i = 0; i < arguments.length; i++) {
+		if(typeof arguments[i]=='undefined'||arguments[i]==null||arguments[i].length==0){
+			return true;
+		}
+	}
+	return false;
+}
+function isset(){
+	for (var i = 0; i < arguments.length; i++) {
+		if(typeof arguments[i]=='undefined'){
+			return false;
+		}
+	}
+	return true;
+}
+function isJSON(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}

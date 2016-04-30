@@ -19,8 +19,9 @@ window.APP=new function(){
 			'<div id="app">',
 				'<section class="upload">',
 					'<h1>Upload an image to mustachify</h1>',
-					'<form>',
-						'<input class="uploadInput" type="file" style="visibility:hidden" />',
+					'<form class="file">',
+						'<input type="hidden" name="testField" value="testValue"/>',
+						'<input class="uploadInput" name="picture" type="file" style="visibility:hidden" />',
 					'</form>',
 					'<div class="uploadButton">Upload</div>',
 				'</section>',
@@ -28,10 +29,50 @@ window.APP=new function(){
 		].join('');
 	}
 	this.attachListeners=function(){
-		$('#app').on('click','div.uploadButton',function(){
+		$('#app')
+
+		.on('click','div.uploadButton',function(){
 			$('input.uploadInput').click();
+		})
+
+		.on('change','input[type=file]',function(){
+			console.log('file change detected');
+			that.submitFile();
+		})
+	}
+	this.submitFile=function(){
+		var form=$('form.form');
+		$.ajax({
+			url: location.origin+'/api/upload',
+			type: 'PUT',
+			data: new FormData(form[0]),
+			processData: false,
+			contentType: false,
+			success:function(data,textStatus, jqXHR){
+				console.log('data sent successfully');
+				if(typeof data.error=='undefined'){
+					//good nothing broke perform actions
+					success('File uploaded!');
+				}else{
+					//display the error
+					warning(data.error);
+				}
+			},
+			error:function(jqXHR, textStatus, error){
+				warning('File upload failed');
+				console.log(error);
+			}
 		});
 	}
+}
+
+function success(msg){
+	console.log('----SUCCESS');
+	console.log(msg);
+}
+function warning(msg){
+	console.log('----WARNING');
+	console.log(msg);
 }
 
 $(document).on('ready',function(){
