@@ -111,7 +111,7 @@ function attachListeners(res,filename){
 		//update gallery.txt
 
 
-		fs.appendFile('gallery.txt', filename, function (err) {
+		fs.appendFile('gallery', filename+'\n', function (err) {
 		});
 
 
