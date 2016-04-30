@@ -277,7 +277,7 @@ ul.gallery{
 }
 ul.gallery>li{
 	width:25%;
-	height:25%;
+	height:40%;
 	background-size:cover;
 	display: inline-block;
 	vertical-align: top;
