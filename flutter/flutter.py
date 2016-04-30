@@ -5,7 +5,7 @@ import cv2,cv
 import math
 import operator
 import os, pdb
-from PIL import Image
+from PIL import Image, ImageEnhance
 import sys
 
 # Import library to display results
@@ -214,8 +214,8 @@ def monocle(pil_image, faceresult, moustache_folder):
     monocle_w = int(1.0 * faceresult['faceRectangle']['width'] * MONOCLE_TO_FACE_SIZE_RATIO)
     soulpatch_h = int(1.0 * monocle_w / monocle_aspect_ratio)
 
-    monocle_x = int(faceLandmarks['pupilLeft']['x'])
-    monocle_y = int(faceLandmarks['pupilLeft']['y'])
+    monocle_x = int(faceLandmarks['pupilRight']['x'])
+    monocle_y = int(faceLandmarks['pupilRight']['y'])
 
     # Rotate and resize the monocle
     # Rotate first so the final filter applied is ANTIALIAS
@@ -231,6 +231,15 @@ def monocle(pil_image, faceresult, moustache_folder):
     pil_image.paste(monocle, (monocle_x-int(monocle.size[0] / 2.0),
                monocle_y-int(monocle.size[1] / 2.0)), monocle)
 
+def watermark(pil_image, moustache_folder):
+    mark = Image.open(os.path.join(moustache_folder, 'flutterbeamLogo.png'))
+    alpha = mark.split()[3]
+    alpha = ImageEnhance.Brightness(alpha).enhance(0.5)
+    mark.putalpha(alpha)
+    ratio =  (0.1 * pil_image.size[0]) / float(mark.size[0])
+    mark = mark.resize((int(mark.size[0] * ratio), int(mark.size[1] * ratio)), Image.ANTIALIAS)
+    pil_image.paste(mark, (10, 10), mark)
+
 def flutterfly(result, input_file, output_file, moustache_folder):
     pil_image = Image.open(input_file)
     cv_image = cv.CreateImageHeader(pil_image.size, cv.IPL_DEPTH_8U, 3)
@@ -239,14 +248,15 @@ def flutterfly(result, input_file, output_file, moustache_folder):
     pil_image = Image.frombytes("RGB", cv.GetSize(cv_image), cv_image.tostring())
 
     for faceresult in result:
-        if faceresult['faceAttributes']['facialHair']['moustache'] < 0.5:
+        if faceresult['faceAttributes']['facialHair']['moustache'] < 0.7:
             mustache(pil_image, faceresult, moustache_folder)
-        if faceresult['faceAttributes']['facialHair']['beard'] < 0.5:
+        if faceresult['faceAttributes']['facialHair']['beard'] < 0.7:
             soulpatch(pil_image,faceresult, moustache_folder)
         # print faceresult
         if faceresult['faceAttributes']['glasses'] == 'NoGlasses':
             monocle(pil_image, faceresult, moustache_folder)
 
+    watermark(pil_image, moustache_folder)
 
     pil_image.save(output_file, "JPEG")
 
