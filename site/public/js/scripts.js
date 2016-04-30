@@ -200,7 +200,6 @@ window.APP=new function(){
 	}
 }
 $(document).keydown(function(e) {
-	console.log('---ALERT');
     switch(e.which) {
         case 37: // left
         	APP&&APP.View&&APP.View.cycle(-1);
