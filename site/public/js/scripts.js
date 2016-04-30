@@ -51,6 +51,7 @@ window.APP=new function(){
 			console.log(imgUrl);
 			return [
 				'<li style="background-image:url(\''+imgUrl+'\')">',
+					'<div></div>',
 				'</li>',
 			].join('');
 
