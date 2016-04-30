@@ -170,7 +170,7 @@ window.APP=new function(){
 		}
 	}
 	this.submitFile=function(){
-		$('img.preview2').addClass('empty');
+		$('img.preview2').addClass('empty').removeAttr('src');
 		$('div.loading').removeClass('hide');
 
 		var fData = new FormData($('form.file')[0]);
