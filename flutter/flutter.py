@@ -191,7 +191,7 @@ def soulpatch(pil_image, faceresult, moustache_folder):
                                Image.ANTIALIAS)
 
     pil_image.paste(soulpatch, (soulpatch_x-int(soulpatch.size[0] / 2.0),
-               soulpatch_y), soulpatch)
+               soulpatch_y+int(faceresult['faceRectangle']['width']*0.01)), soulpatch)
 
 def monocle(pil_image, faceresult, moustache_folder):
     monocle = Image.open(os.path.join(moustache_folder, 'monocle.png'))
@@ -239,9 +239,13 @@ def flutterfly(result, input_file, output_file, moustache_folder):
     pil_image = Image.frombytes("RGB", cv.GetSize(cv_image), cv_image.tostring())
 
     for faceresult in result:
-        mustache(pil_image, faceresult, moustache_folder)
-        soulpatch(pil_image,faceresult, moustache_folder)
-        monocle(pil_image, faceresult, moustache_folder)
+        if faceresult['faceAttributes']['facialHair']['moustache'] < 0.5:
+            mustache(pil_image, faceresult, moustache_folder)
+        if faceresult['faceAttributes']['facialHair']['beard'] < 0.5:
+            soulpatch(pil_image,faceresult, moustache_folder)
+        # print faceresult
+        if faceresult['faceAttributes']['glasses'] == 'NoGlasses':
+            monocle(pil_image, faceresult, moustache_folder)
 
 
     pil_image.save(output_file, "JPEG")
@@ -251,9 +255,8 @@ def main(input_file, output_file, moustache_folder):
         data = f.read()
 
         # Face detection parameters
-        params = { 'returnFaceAttributes': 'age,gender',
+        params = { 'returnFaceAttributes': 'age,gender,glasses,facialHair',
                    'returnFaceLandmarks': 'true'}
-
         headers = dict()
         headers['Ocp-Apim-Subscription-Key'] = _key
         headers['Content-Type'] = 'application/octet-stream'
