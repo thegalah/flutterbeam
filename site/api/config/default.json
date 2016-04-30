@@ -1,6 +1,8 @@
 {
 	"app":{
 		"port":5556,
-		"upload_dir":"../uploads/"
+		"upload_dir":"../uploads/",
+		"path_to_flutter":"../",
+		"flutter_output":"output/"
 	}
 }
