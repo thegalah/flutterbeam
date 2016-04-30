@@ -20,6 +20,9 @@ div.uploadButton{
 	margin:0px auto;
 	margin-top:50px;
 }
+div.uploadButton span{
+	cursor: pointer;
+}
 section.upload{
 	background:#55c989;
 	color:#fff;

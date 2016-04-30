@@ -36,7 +36,8 @@ window.APP=new function(){
 						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
 					'<div class="uploadButton">',
-						'<span class="icon-cloud-upload2"></span>Upload',
+						'<span class="icon-cloud-upload2"></span>',
+						'<span>Upload</span>',
 					'</div>',
 				'</section>',
 			'</div>'
@@ -45,7 +46,7 @@ window.APP=new function(){
 	this.attachListeners=function(){
 		$('#app')
 
-		.on('click','div.uploadButton',function(){
+		.on('click','div.uploadButton, div.uploadButton span',function(){
 			$('input[type=file]').click();
 		})
 
