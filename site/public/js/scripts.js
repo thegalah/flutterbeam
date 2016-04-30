@@ -23,7 +23,8 @@ window.APP=new function(){
 					'<form class="file">',
 						'<input type="file" name="picture_file" style="display:none;">',
 					'</form>',
-					'<div class="uploadButton">Upload</div>',
+					'<div class="uploadButton">',
+						'<span class="icon-cloud-upload2"></span>Upload</div>',
 				'</section>',
 			'</div>'
 		].join('');
