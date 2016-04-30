@@ -80,8 +80,8 @@ window.APP=new function(){
 				image.src = theFile.target.result;
 
 				image.onload = function() {
-					var MAX_X=800;
-					var MAX_Y=600;
+					var MAX_X=$(window).width()-30;
+					var MAX_Y=$(window).height()-133;
 					var x=this.width;
 					var y=this.height;
 
