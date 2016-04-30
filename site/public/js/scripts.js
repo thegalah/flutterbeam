@@ -25,8 +25,8 @@ window.APP=new function(){
 					'</div>',
 				'</section>',
 				'<section class="upload">',
-					'<div class="img_container">',
-						'<div class="loading">',
+					'<div class="img_container empty">',
+						'<div class="loading hide">',
 							'<span class="icon-face-moustache"></span>',
 						'</div>',
 						'<img class="preview2 empty"/>',
@@ -90,7 +90,8 @@ window.APP=new function(){
 		}
 	}
 	this.submitFile=function(){
-
+		$('img.preview2').addClass('empty');
+		$('div.loading').removeClass('hide');
 
 		var fData = new FormData($('form.file')[0]);
 		console.log(fData);
@@ -108,6 +109,7 @@ window.APP=new function(){
 					$('img.preview2')
 					.attr('src', location.origin+'/api/flutters/'+data.filename).removeClass('empty')
 					success('File uploaded!');
+					$('div.loading').addClass('hide');
 				}else{
 					//display the error
 					warning(data.error);
